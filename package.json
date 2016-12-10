@@ -1,7 +1,7 @@
 {
   "name": "sklonenie",
   "version": "0.0.2",
-  "description": "Declination russian names",
+  "description": "Declination Russian names",
   "main": "js/sklonenie.js",
   "scripts": {
     "test": "mocha -c",
