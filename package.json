@@ -25,7 +25,7 @@
     "middlename",
     "cases"
   ],
-  "author": "Danakt Frost",
+  "author": "Danakt Frost <mail@danakt.ru>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/danakt/sklonenie-js/issues"
