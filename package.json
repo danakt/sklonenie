@@ -1,10 +1,10 @@
 {
   "name": "sklonenie",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Declination russian names",
   "main": "js/sklonenie.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha -c",
     "build": "npm run min",
     "min": "babel --presets es2015,stage-0,babili js/sklonenie.js -o js/sklonenie.min.js --no-comments"
   },
