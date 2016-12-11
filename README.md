@@ -2,7 +2,7 @@ Sklonenie.js
 ================================================================================
 Лёгкая и быстрая библиотека для склонения по падежам русских имён, отчеств и фамилий
 
-[![npm](https://img.shields.io/npm/v/sklonenie.svg?maxAge=2592000)](https://www.npmjs.com/package/sklonenie)
+[![npm](https://img.shields.io/npm/v/sklonenie.svg)](https://www.npmjs.com/package/sklonenie)
 
 Использование
 --------------------------------------------------------------------------------
