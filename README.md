@@ -3,6 +3,7 @@ Sklonenie.js
 Лёгкая и быстрая библиотека для склонения по падежам русских имён, отчеств и фамилий
 
 [![npm](https://img.shields.io/npm/v/sklonenie.svg)](https://www.npmjs.com/package/sklonenie)
+[![Travis CI](https://api.travis-ci.org/danakt/sklonenie-js.svg?branch=master)](https://travis-ci.org/danakt/sklonenie-js)
 
 Использование
 --------------------------------------------------------------------------------
