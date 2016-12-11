@@ -26,7 +26,6 @@ class Sklonenie {
     // Буквы алфавита
     static get chars() {
         return [
-            'абвгдеёжзийклмнопрстуфхцчшщэюя'.split(''), // Все буквы
             'бвгджзйклмнпрстфхцчшщ'.split(''),          // Согласные
             'аеёиоуыэюя'.split(''),                     // Гласные
             // Буквы для специфичных окончаний
@@ -50,7 +49,7 @@ class Sklonenie {
     static get flexListFirstname() {
         var m = this.m;
         var w = this.w;
-        var [alph, con, vow, acon, bcon, avow] = this.chars;
+        var [con, vow, acon, bcon, avow] = this.chars;
         // Склоняемые исключения женских имён
         // с мягким знаком на конце
         var excep = [
@@ -67,7 +66,7 @@ class Sklonenie {
             `[${vow},${bcon}]а`,['а   ы    е    у    ой   е'  ],  w,
             `[${acon}]а`,       ['а   и    е    у    ой   е'  ],  w,
             '[ь]я',             ['я   и    е    ю    ей   е'  ],  w,
-            `[${alph}]я`,       ['я   и    и    ю    ей   и'  ],  w,
+            `я`,                ['я   и    и    ю    ей   и'  ],  w,
             `[${excep}]ь`,      ['ь   и    и    ь    ью   и'  ],  w,
             `[пав]ел`,          ['ел  ла   лу   ла   лом  ле' ],  m,
             `[л]ев`,            ['ев  ьва  ьву  ьва  ьвом ьве'],  m,
@@ -77,7 +76,7 @@ class Sklonenie {
     static get flexListMiddlename() {
         var m = this.m;
         var w = this.w;
-        var [alph, con, vow, acon, bcon]  = this.chars;
+        var [con, vow, acon, bcon]  = this.chars;
 
         var conModif = con
             .filter(item => item !== 'в')
@@ -95,7 +94,7 @@ class Sklonenie {
     static get flexListLastname() {
         var m = this.m;
         var w = this.w;
-        var [alph, con, vow, acon, bcon]  = this.chars;
+        var [con, vow, acon, bcon]  = this.chars;
 
         return this.prepareList([
             // Окончания         И    Р    Д    В    Т    П      пол
@@ -105,7 +104,7 @@ class Sklonenie {
             'ый',               ['ый  ого  ому  ого  ым   ом'],   m,  // Гордый
             '[ск,]ая',          ['ая  ой   ой   ую   ой   ой'],   w,  // Крупская, Боровая
             'ой',               ['ой  ого  ому  ого  им   ом'],   m,  // Толстой
-            `[${alph}]я`,       ['я   и    и    ю    ей   и' ],  m|w, // Берия
+            `я`,                ['я   и    и    ю    ей   и' ],  m|w, // Берия
             `[${acon}]а`,       ['а   и    е    у    ой   е' ],  m|w, // Глинка
             `[${bcon}]а`,       ['а   ы    е    у    ой   е' ],  m|w, // Линда
             'ь',                ['ь   я    ю    я    ем   е' ],   m,  // Гоголь
