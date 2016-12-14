@@ -87,7 +87,7 @@ var tolstoy = sklonenie('Лев', 'Николаевич', 'Толстой')
 
 console.log(
     tolstoy['дательный'], // получение по названию
-    tolstoy[0]            // получение по индексу (именительный)
+    tolstoy[2]            // получение по индексу (0–5)
 );
 ```
 
@@ -95,11 +95,11 @@ console.log(
 
 *Пример:*
 ```js
-var volkonskaya = sklonenie('Мария', 'Николаевна', 'Волконская', 2);
+var saltikovSchedrin = sklonenie('Михаил', 'Евграфович', 'Салтыков-Щедрин', 1);
 
-console.log(volkonskaya.lastname['винительный']);
+console.log(saltikovSchedrin.lastname['винительный']);
  /* ->
- * Волконскую
+ * Салтыкова-Щедрина
  */
 ```
 
