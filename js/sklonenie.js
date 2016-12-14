@@ -26,12 +26,14 @@ class Sklonenie {
     // Буквы алфавита
     static get chars() {
         return [
-            'бвгджзйклмнпрстфхцчшщ'.split(''),          // Согласные
-            'аеёиоуыэюя'.split(''),                     // Гласные
+            'бвгджзйклмнпрстфхцчшщ'.split(''), // Согласные
+            'аеёиоуыэюя'.split(''),            // Гласные
             // Буквы для специфичных окончаний
-            'гжкхчшщ'.split(''),                        // ГлинкИ
-            'бвдзлмнпрстфц'.split(''),                  // ЛиндЫ
-            'аеёоуыэюя'.split(''),                      // О НиколаЕ, о ДмитриИ
+            'гжкхчшщ'.split(''),               // ГлинкИ
+            'бвдзлмнпрстфц'.split(''),         // ЛиндЫ
+            'аеёоуыэюя'.split(''),             // О НиколаЕ, о ДмитриИ
+            'бвгдзклмнпрстфх'.split(''),       // ДельвигОМ
+            'жйцчшщь'.split(''),               // АбрамовичЕМ
         ]
     }
     // Падежи
@@ -94,7 +96,7 @@ class Sklonenie {
     static get flexListLastname() {
         var m = this.m;
         var w = this.w;
-        var [con, vow, acon, bcon]  = this.chars;
+        var [con, vow, acon, bcon, avow, ccon, dcon] = this.chars;
 
         return this.prepareList([
             // Окончания         И    Р    Д    В    Т    П      пол
@@ -102,15 +104,16 @@ class Sklonenie {
             '[ин,ен,ев,ов]а',   ['а   ой   ой   у    ой   ой'],   w,  // Путина, Гребена, Цветаева, Ахматова
             '[ск,]ий',          ['ий  ого  ому  ого  им   ом'],   m,  // Невский, Дикий
             'ый',               ['ый  ого  ому  ого  ым   ом'],   m,  // Гордый
-            '[ск,]ая',          ['ая  ой   ой   ую   ой   ой'],   w,  // Крупская, Боровая
-            'ой',               ['ой  ого  ому  ого  им   ом'],   m,  // Толстой
+            'ая',               ['ая  ой   ой   ую   ой   ой'],   w,  // Крупская, Боровая
+            'ой',               ['ой  ого  ому  ого  ым   ом'],   m,  // Толстой
             `я`,                ['я   и    и    ю    ей   и' ],  m|w, // Берия
             `[${acon}]а`,       ['а   и    е    у    ой   е' ],  m|w, // Глинка
             `[${bcon}]а`,       ['а   ы    е    у    ой   е' ],  m|w, // Линда
             'ь',                ['ь   я    ю    я    ем   е' ],   m,  // Гоголь
             `[${vow}]й`,        ['й   я    ю    я    ем   е' ],   m,  // Гайдай
             `[ых,их,${vow}]`,   ['.   .    .    .    .    .' ],  m|w, // Седых, Гёте
-            `[${con}]`,         ['.   а    у    а    ем   е' ],   m,  // Бах, Абрамович
+            `[${ccon}]`,        ['.   а    у    а    ом   е' ],   m,  // Дельвиг
+            `[${dcon}]`,        ['.   а    у    а    ем   е' ],   m,  // Бах, Абрамович
         ]);
     }
 
@@ -242,22 +245,37 @@ class Sklonenie {
     getName(propNum, string, gender) {
         var cases = this.constructor.cases;
 
+        // Если строка не проходит проверку, возвращаем её же
         if (!string || typeof string !== 'string')
             return Array(cases.length).fill(string + '');
 
         // Получаем список флексий
         var propName = ['First', 'Middle', 'Last'];
-
-        // console.log(propNum, propName[propNum - 1]);
-
         var flex = this.constructor[
             'flexList'+ propName[propNum - 1] +'name'
         ];
 
         // Ищем подходящее окончание из списка
-        var out =  this.constructor.getFlexion(
-            string, (gender || 0), flex
-        );
+        var out = '';
+        if(propNum === 3 && ~string.indexOf('-')) {
+            // Если это фамилия и двойная, склоняем обе части
+            var lastNames = string.split('-');
+
+            // Получаем склонения каждой части
+            for(var i = 0; i < lastNames.length; i++) {
+                lastNames[i] = this.constructor.getFlexion(
+                    lastNames[i], (gender || 0), flex
+                );
+            }
+            // Соединяем полученные фамилии в одну
+            out = lastNames[0].map((item, i) => item + '-' + lastNames[1][i]);
+        } else {
+            // В остальных случаях прсото склоняем строку
+            out =  this.constructor.getFlexion(
+                string, (gender || 0), flex
+            );
+        }
+
 
         for(var i = 0; i < cases.length; i++) {
             out[cases[i]] = out[i]
