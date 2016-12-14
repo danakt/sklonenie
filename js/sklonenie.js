@@ -4,8 +4,6 @@
  * отчеств и фамилий
  * @author Danakt Frost <mail@danakt.ru>
  *
- * @todo Реализовать склонение двойных фамилий (прим. Салтыков-Щедрин)
- *
  * @function sklonenie
  * @param {string} firstname Склоняемое имя
  * @param {string} middlename Склоняемое отчество
