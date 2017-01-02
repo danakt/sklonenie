@@ -1,6 +1,6 @@
 {
   "name": "sklonenie",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Declination Russian names",
   "main": "js/sklonenie.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danakt/sklonenie-js.git"
+    "url": "git+https://github.com/danakt/sklonenie.js.git"
   },
   "keywords": [
     "sklonenie",
@@ -28,9 +28,9 @@
   "author": "Danakt Frost <mail@danakt.ru>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/danakt/sklonenie-js/issues"
+    "url": "https://github.com/danakt/sklonenie.js/issues"
   },
-  "homepage": "https://github.com/danakt/sklonenie-js",
+  "homepage": "https://github.com/danakt/sklonenie.js",
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.20.0",
