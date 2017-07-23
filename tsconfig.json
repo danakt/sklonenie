@@ -1,9 +1,15 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "sourceMap": true,
+    "outDir": "./build",
+    "outFile":"./build/build.js",
+    "sourceRoot": "./src/",
+    "rootDir": "./src/",
+    "sourceMap": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
     "target": "es6",
-    "module": "commonjs",
+    "module": "amd",
     "moduleResolution": "node",
     "declaration": false,
     "noImplicitAny": false,
@@ -19,10 +25,11 @@
     "es7",
     "dom"
   ],
-  "baseUrl": ".",
+  "baseUrl": "./",
   "exclude": [
     "dist",
     "build",
-    "node_modules"
+    "node_modules",
+    "test"
   ]
 }
