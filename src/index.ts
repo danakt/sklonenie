@@ -4,9 +4,9 @@
  * и фамилий
  * @author Danakt Frost <mail@danakt.ru>
  */
-import fillArray                    from './fillArray'
+import fillArray                    from './fillarray'
 import { M, W, CASES, CHARS, NAME } from './constants'
-import { FLEX_LISTS }               from './flexList'
+import { FLEX_LISTS }               from './flexlist'
 
 /** ----------------------------------------------------------------------------
  * Получение окончания по выборке
