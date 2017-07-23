@@ -57,7 +57,7 @@ function getFlexion(str: string, g: number, nameIndex: number): string[] {
  * @param  {Number} gender  — род
  * @return {Array}          — результат
  */
-function getName(nameIndex: number, str: string, gender: number): string[] {
+function getName(nameIndex: number, str: string, gender: number = 0): string[] {
     // Если строка не проходит проверку, возвращаем её же
     if (!str || typeof str !== 'string')
         return fillArray(Array(CASES.length), str + '')
@@ -69,27 +69,19 @@ function getName(nameIndex: number, str: string, gender: number): string[] {
     let out: string[]
 
     // Если это фамилия и двойная, склоняем обе части
-    if (nameIndex === 2 && str.indexOf('-') !== -1) {
+    if (nameIndex === NAME.LAST && str.indexOf('-') > -1) {
         let lastNames = str.split('-')
-        let lastNamesArr: string[][]
+        let lastNamesArr: string[][] = []
 
         // Получаем склонения каждой части
         for (let i = 0; i < lastNames.length; i++) {
-            lastNamesArr[i] = getFlexion(
-                lastNames[i],
-                (gender || 0),
-                NAME.LAST
-            )
+            lastNamesArr[i] = getFlexion(lastNames[i], gender, NAME.LAST)
         }
         // Соединяем полученные фамилии в одну
         out = lastNamesArr[0].map((item, i) => item + '-' + lastNamesArr[1][i])
     } else {
         // В остальных случаях прсото склоняем строку
-        out = getFlexion(
-            str,
-            (gender || 0),
-            nameIndex
-        )
+        out = getFlexion(str, gender, nameIndex)
     }
 
 
@@ -183,7 +175,7 @@ export function middlename(str: string, gender?: number) {
 
 /** ----------------------------------------------------------------------------
  * Экспорт склонения отчества
- * @param  {String} str    — отчество
+ * @param  {String} str    — фамилия
  * @param  {Number} gender — род
  * @return {Array}
  */
