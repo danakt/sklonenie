@@ -1,18 +1,16 @@
-import { M, W, CHARS, EXCEP, SHORT_MIDDLE_FLEX } from './constants'
+const { M, W, CHARS, EXCEP, SHORT_MIDDLE_FLEX } = require('./constants')
 
 /** ----------------------------------------------------------------------------
  * Буквы алфавита
  */
-const { CON, VOW, ACON, BCON, AVOW, CCON, DCON }: {
-    [x: string]: string[]
-} = CHARS
+const { CON, VOW, ACON, BCON, AVOW, CCON, DCON } = CHARS
 
 /** ----------------------------------------------------------------------------
  * Функция подготовки объекта выборки
  * @param  {Array} arr
  * @return {FlexList}
  */
-function prepareList(arr: any[]): FlexList {
+function prepareList(arr) {
     const list = {}
 
     // Превращаем массив в объект
@@ -52,9 +50,8 @@ function prepareList(arr: any[]): FlexList {
 /** ----------------------------------------------------------------------------
  * Списки окончаний
  * @type {Array}
- * @exports
  */
-export const FLEX_LISTS: FlexList[] = [
+const FLEX_LISTS = [
     // Окончания имён
     [
         // Окончания                И    Р    Д    В    Т    П      пол
@@ -98,3 +95,9 @@ export const FLEX_LISTS: FlexList[] = [
         `[${DCON}]`,              ['.    а    у    а    ем   е' ],   M,  // Бах, Абрамович
     ]
 ].map(prepareList)
+
+/** ----------------------------------------------------------------------------
+ * @exports
+ * @default FLEX_LIST
+ */
+module.exports = FLEX_LISTS

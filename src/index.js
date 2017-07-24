@@ -4,9 +4,9 @@
  * и фамилий
  * @author Danakt Frost <mail@danakt.ru>
  */
-import fillArray                    from './fillarray'
-import { M, W, CASES, CHARS, NAME } from './constants'
-import { FLEX_LISTS }               from './flexlist'
+const fillArray                    = require('./fillarray')
+const { M, W, CASES, CHARS, NAME } = require('./constants')
+const FLEX_LISTS                   = require('./flexlist')
 
 /** ----------------------------------------------------------------------------
  * Получение окончания по выборке
@@ -15,19 +15,19 @@ import { FLEX_LISTS }               from './flexlist'
  * @param  {Object} name    — индекс части имени (FIRST=0/MIDDLE=1/LAST=2)
  * @return {Array}
  */
-function getFlexion(str: string, g: number, nameIndex: number): string[] {
-    let retArr: string[] = [] // Возвращаемый массив
+function getFlexion(str, g, nameIndex) {
+    let retArr = [] // Возвращаемый массив
 
-    const flexList: FlexList = FLEX_LISTS[nameIndex]
+    const flexList = FLEX_LISTS[nameIndex]
 
     for (let e in flexList) {
-        const eClear: string     = e.replace(/\[|\]/g, '')
-        const lenWoutEnd: number = str.length - eClear.length
-        const ending: string     = str.substr(lenWoutEnd).toLowerCase()
+        const eClear     = e.replace(/\[|\]/g, '')
+        const lenWoutEnd = str.length - eClear.length
+        const ending     = str.substr(lenWoutEnd).toLowerCase()
 
         if (eClear === ending) {
             // Если пол не совпадает, идём дальше
-            const flexGender = <number>flexList[e][flexList[e].length - 1]
+            const flexGender = flexList[e][flexList[e].length - 1]
             if (g && !(flexGender & g)) {
                 continue
             }
@@ -57,21 +57,21 @@ function getFlexion(str: string, g: number, nameIndex: number): string[] {
  * @param  {Number} gender  — род
  * @return {Array}          — результат
  */
-function getName(nameIndex: number, str: string, gender: number = 0): string[] {
+function getName(nameIndex, str, gender = 0) {
     // Если строка не проходит проверку, возвращаем её же
     if (!str || typeof str !== 'string')
         return fillArray(Array(CASES.length), str + '')
 
     // Получаем список флексий
-    const flex: FlexList = FLEX_LISTS[nameIndex]
+    const flex = FLEX_LISTS[nameIndex]
 
     // Ищем подходящее окончание из списка
-    let out: string[]
+    let out
 
     // Если это фамилия и двойная, склоняем обе части
     if (nameIndex === NAME.LAST && str.indexOf('-') > -1) {
         let lastNames = str.split('-')
-        let lastNamesArr: string[][] = []
+        let lastNamesArr = []
 
         // Получаем склонения каждой части
         for (let i = 0; i < lastNames.length; i++) {
@@ -94,10 +94,10 @@ function getName(nameIndex: number, str: string, gender: number = 0): string[] {
 
 /** ----------------------------------------------------------------------------
  * Обработка пола
- * @param {Number|String} g — Род. Может принимать значения: 1 или 2,
+ * @param {?Number|String} g — Род. Может принимать значения: 1 или 2,
  * «m» или «w», «man» или «woman»
  */
-function getGender(g?: number | string): number {
+function getGender(g) {
     if (g == null) {
         return 0
     }
@@ -126,15 +126,9 @@ function getGender(g?: number | string): number {
  * @param  {String}  lastname   — Склоняемая фамилия
  * @param  {?Number} [gender=0] — Род
  * @return {Object}
- * @exports
  */
-export default function full(
-    firstname:  string,
-    middlename: string,
-    lastname:   string,
-    g:          number = 0,
-): { [x: string]:  string[] } {
-    const gender: number = getGender(g)
+function full(firstname, middlename, lastname, g = 0) {
+    const gender = getGender(g)
 
     const ret = {
         firstname:  getName(NAME.FIRST, firstname, gender),
@@ -155,30 +149,42 @@ export default function full(
 
 /** ----------------------------------------------------------------------------
  * Экспорт склонения имени
- * @param  {String} str    — имя
- * @param  {Number} gender — род
+ * @param  {String}  str    — имя
+ * @param  {?Number} gender — род
  * @return {Array}
  */
-export function firstname(str: string, gender?: number) {
+function firstname(str, gender) {
     return getName(NAME.FIRST, str, gender)
 }
 
 /** ----------------------------------------------------------------------------
  * Экспорт склонения отчества
- * @param  {String} str    — отчество
- * @param  {Number} gender — род
+ * @param  {String}  str    — отчество
+ * @param  {?Number} gender — род
  * @return {Array}
  */
-export function middlename(str: string, gender?: number) {
+function middlename(str, gender) {
     return getName(NAME.MIDDLE, str, gender)
 }
 
 /** ----------------------------------------------------------------------------
  * Экспорт склонения отчества
- * @param  {String} str    — фамилия
- * @param  {Number} gender — род
+ * @param  {String}  str    — фамилия
+ * @param  {?Number} gender — род
  * @return {Array}
  */
-export function lastname(str: string, gender?: number) {
+function lastname(str, gender) {
     return getName(NAME.LAST, str, gender)
 }
+
+/** ----------------------------------------------------------------------------
+ * @exports
+ * @default full
+ * @prop firstname
+ * @prop middlename
+ * @prop lastname
+ */
+module.exports = full
+module.exports.firstname  = firstname
+module.exports.middlename = middlename
+module.exports.lastname   = lastname

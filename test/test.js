@@ -1,9 +1,13 @@
-import sklonenie    from '../src'
-import * as mocha   from 'mocha'
-import { expect }   from 'chai'
-import { firstnames, middlenames, lastnames } from './mock'
+const sklonenie  = require('../src')
+const mocha      = require('mocha')
+const { expect } = require('chai')
+const { firstnames, middlenames, lastnames } = require('./mock')
 
-const CASES: string[] = [
+/** ----------------------------------------------------------------------------
+ * Список падежей
+ * @type {Array}
+ */
+const CASES = [
     'Именительный',
     'Родительный',
     'Дательный',
@@ -18,13 +22,13 @@ const CASES: string[] = [
 describe('Склонение имён', () => {
     // Перебор имён
     for (let i = 0; i < firstnames.length; i++) {
-        describe(<string>firstnames[i][0], () => {
+        describe(firstnames[i][0], () => {
             // Перебор падежей
             for (let c = 0; c < CASES.length; c++) {
                 it(CASES[c], () => {
-                    const gender: number = <number>firstnames[i][6]
-                    const firstname: string = sklonenie(
-                        <string>firstnames[i][0],
+                    const gender = firstnames[i][6]
+                    const firstname = sklonenie(
+                        firstnames[i][0],
                         '',
                         '',
                         gender
@@ -43,14 +47,14 @@ describe('Склонение имён', () => {
 describe('Склонение отчеств', () => {
    // Перебор имён
     for (let i = 0; i < middlenames.length; i++) {
-        describe(<string>middlenames[i][0], () => {
+        describe(middlenames[i][0], () => {
             // Перебор падежей
             for (let c = 0; c < CASES.length; c++) {
                 it(CASES[c], () => {
-                    const gender: number = <number>middlenames[i][6]
-                    const middlename: string = sklonenie(
+                    const gender = middlenames[i][6]
+                    const middlename = sklonenie(
                         '',
-                        <string>middlenames[i][0],
+                        middlenames[i][0],
                         '',
                         gender
                     ).middlename[c]
@@ -68,15 +72,15 @@ describe('Склонение отчеств', () => {
 describe('Склонение отчеств', () => {
   // Перебор имён
   for (let i = 0; i < lastnames.length; i++) {
-      describe(<string>lastnames[i][0], () => {
+      describe(lastnames[i][0], () => {
           // Перебор падежей
           for (let c = 0; c < CASES.length; c++) {
               it(CASES[c], () => {
-                  const gender: number = <number>lastnames[i][6]
-                  const lastname: string = sklonenie(
+                  const gender = lastnames[i][6]
+                  const lastname = sklonenie(
                       '',
                       '',
-                      <string>lastnames[i][0],
+                      lastnames[i][0],
                       gender
                   ).lastname[c]
 

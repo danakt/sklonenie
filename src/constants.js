@@ -1,9 +1,8 @@
 /** ----------------------------------------------------------------------------
  * Буквы алфавита
  * @type {Object}
- * @exports
  */
-export const CHARS: { [x: string]: any } = new Proxy({
+const CHARS = new Proxy({
     CON:  'бвгджзйклмнпрстфхцчшщ',  // Согласные
     VOW:  'аеёиоуыэюя',             // Гласные
     // Буквы для специфичных окончаний
@@ -21,26 +20,23 @@ export const CHARS: { [x: string]: any } = new Proxy({
 /** ----------------------------------------------------------------------------
  * Окончания сокращенных отчеств
  * @type {Array}
- * @exports
  */
-export const SHORT_MIDDLE_FLEX: string[] = CHARS.CON
+const SHORT_MIDDLE_FLEX = CHARS.CON
     .filter(item => item !== 'в')
     .map(item => item + 'ич')
 
 /** ----------------------------------------------------------------------------
  * Константы родов
  * @type {Number}
- * @exports
  */
-export const M: number = 1 << 0 // Мужской
-export const W: number = 1 << 1 // Женский
+const M = 1 << 0 // Мужской
+const W = 1 << 1 // Женский
 
 /** ----------------------------------------------------------------------------
  * Падежи
  * @type {Array}
- * @exports
  */
-export const CASES: string[] = [
+const CASES = [
     'именительный', // Есть кто?
     'родительный',  // Нет кого?
     'дательный',    // Дать кому?
@@ -52,20 +48,18 @@ export const CASES: string[] = [
 /** ----------------------------------------------------------------------------
  * Индексы частей имени
  * @type {Number}
- * @exports
  */
-export enum NAME {
-    FIRST = 0,
-    MIDDLE,
-    LAST,
+const NAME = {
+    FIRST:  0,
+    MIDDLE: 1,
+    LAST:   2,
 }
 
 /** ----------------------------------------------------------------------------
  * Склоняемые исключения женских имён с мягким знаком на конце
  * @type {Array}
- * @exports
  */
-export const EXCEP: string[] = [
+const EXCEP = [
     'любовь',
     'адель',
     'жизель',
@@ -78,3 +72,16 @@ export const EXCEP: string[] = [
     'сесиль',
     'нинель'
 ].map(item => item.substr(0, item.length - 1))
+
+/** ----------------------------------------------------------------------------
+ * @exports
+ */
+module.exports = {
+    CHARS,
+    SHORT_MIDDLE_FLEX,
+    M,
+    W,
+    CASES,
+    NAME,
+    EXCEP,
+}
