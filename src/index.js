@@ -184,7 +184,13 @@ function lastname(str, gender) {
  * @prop middlename
  * @prop lastname
  */
-module.exports = full
-module.exports.firstname  = firstname
-module.exports.middlename = middlename
-module.exports.lastname   = lastname
+const sklonenie = full
+sklonenie.firstname  = firstname
+sklonenie.middlename = middlename
+sklonenie.lastname   = lastname
+
+if (typeof module !== 'undefined' && exports in module) {
+    module.exports = sklonenie
+} else if (typeof window !== 'undefined') {
+    window.sklonenie = sklonenie
+}
