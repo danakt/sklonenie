@@ -189,8 +189,10 @@ sklonenie.firstname  = firstname
 sklonenie.middlename = middlename
 sklonenie.lastname   = lastname
 
-if (typeof module !== 'undefined' && exports in module) {
+if (typeof module !== 'undefined' && module.exports != null) {
     module.exports = sklonenie
 } else if (typeof window !== 'undefined') {
     window.sklonenie = sklonenie
+} else {
+    throw new Error('Невозможно экспортировать модуль')
 }
