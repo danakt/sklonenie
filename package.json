@@ -1,8 +1,8 @@
 {
   "name": "sklonenie",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Declination Russian names",
-  "main": "dist/build.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "webpack -p --progress --colors",
     "test": "mocha test/test.js -c"
@@ -25,20 +25,14 @@
     "cases"
   ],
   "author": "Danakt Frost <mail@danakt.ru>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/danakt/sklonenie.js/issues"
   },
   "homepage": "https://github.com/danakt/sklonenie.js",
   "devDependencies": {
-    "awesome-typescript-loader": "^3.2.1",
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
     "chai": "^3.5.0",
-    "mocha": "^3.2.0",
-    "webpack": "^3.3.0"
+    "mocha": "^3.2.0"
   },
   "directories": {
     "test": "test"
