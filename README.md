@@ -8,47 +8,26 @@ Sklonenie.js
 
 Использование
 --------------------------------------------------------------------------------
+Установите npm пакет:
 
-### Серверная сторона
-
-Если вы хотите использовать Sklonenie.js как node.js-зависимость, установите пакет при помощи *npm*:
-
-``$ npm install sklonenie``
+```
+$ npm install sklonenie
+```
 
 И используйте следующим образом:
 ```js
-const sklonenie = require('sklonenie');
+const sklonenie = require('sklonenie')
 // ...
-var bulgakov = sklonenie('Михаил', 'Афанасьевич', 'Булгаков');
+const bulgakov = sklonenie('Михаил', 'Афанасьевич', 'Булгаков')
 
 console.log(
     `На страницах рукописи ${bulgakov['винительный'].join(' ')}
     «Мастер и Маргарита» ученые обнаружили следы морфия`
- );
+ )
 /* ->
  На страницах рукописи Михаила Афанасьевича Булгакова
  «Мастер и Маргарита» ученые обнаружили следы морфия
 */
-```
-
-### Клиентская сторона
-
-Для использования Sklonenie.js в браузере, вам нужно подключить минифицированный файл на html-странице (*js/sklonenie.min.js*) и в дальнейшем использовать функцию ``sklonenie``
-
-```html
-<script src="sklonenie.min.js"></script>
-<script>
-    var brodsky = sklonenie.lastname('Бродский');
-
-    console.log(
-        `Ходят слухи, что получить Нобелевскую премию
-        по литературе ${brodsky['дательный']} помогли связи`
-    );
-    /* ->
-     Ходят слухи, что получить Нобелевскую премию
-     по литературе Бродскому помогли связи
-    */
-</script>
 ```
 
 Методы
@@ -58,20 +37,20 @@ console.log(
 
 *Синтаксис:*
 ```js
-sklonenie(имя, отчество, фамилия[, пол]);
-sklonenie(имя, отчество, фамилия[, пол])[склонение];
+sklonenie(имя, отчество, фамилия[, пол])
+sklonenie(имя, отчество, фамилия[, пол])[склонение]
 ```
 Последный аргумент — пол — может принимать значение «1» — мужское имя, или «2» — женское. Не обязателен, но может помочь склонять некоторые имена и фамилии.
 
 *Пример:*
 ```js
-var adel_1 = sklonenie('Адель', 'Захарович', 'Дельвиг');
-var adel_2 = sklonenie('Адель', 'Захаровна', 'Дельвиг', 2);
+const adel_1 = sklonenie('Адель', 'Захарович', 'Дельвиг', 1)
+const adel_2 = sklonenie('Адель', 'Захаровна', 'Дельвиг', 2)
 
 console.log(
     adel_1['родительный'],
     adel_2['родительный']
-);
+)
 /* ->
  * ['Аделя', 'Захаровича', 'Дельвига']
  * ['Адели', 'Захаровны', 'Дельвиг']
@@ -82,21 +61,21 @@ console.log(
 
 *Пример:*
 ```js
-var tolstoy = sklonenie('Лев', 'Николаевич', 'Толстой')
+const tolstoy = sklonenie('Лев', 'Николаевич', 'Толстой')
 
 console.log(
     tolstoy['дательный'], // получение по названию
     tolstoy[2]            // получение по индексу (0–5)
-);
+)
 ```
 
 Также возможно получение части имени из результата
 
 *Пример:*
 ```js
-var saltikovSchedrin = sklonenie('Михаил', 'Евграфович', 'Салтыков-Щедрин', 1);
+const saltikovSchedrin = sklonenie('Михаил', 'Евграфович', 'Салтыков-Щедрин', 1)
 
-console.log(saltikovSchedrin.lastname['винительный']);
+console.log(saltikovSchedrin.lastname['винительный'])
  /* ->
  * Салтыкова-Щедрина
  */
@@ -107,14 +86,14 @@ console.log(saltikovSchedrin.lastname['винительный']);
 
 *Синтаксис:*
 ```js
-sklonenie.firstname(имя[, пол]);
+sklonenie.firstname(имя[, пол])
 ```
 
 *Пример:*
 ```js
-var pavel = sklonenie.firstname('Павел');
+const pavel = sklonenie.firstname('Павел')
 
-console.log(pavel['именительный']);
+console.log(pavel['именительный'])
  /* ->
  * Павел
  */
@@ -125,19 +104,19 @@ console.log(pavel['именительный']);
 
 *Синтаксис:*
 ```js
-sklonenie.middlename(отчество[, пол]);
+sklonenie.middlename(отчество[, пол])
 ```
 
 *Пример:*
 ```js
-var mihaylovich = sklonenie.middlename('Михайлович');
-var mihalych    = sklonenie.middlename('Михалыч');
+const mihaylovich = sklonenie.middlename('Михайлович')
+const mihalych    = sklonenie.middlename('Михалыч')
 
-console.log(mihaylovich['родительный']);
+console.log(mihaylovich['родительный'])
 /* ->
  * Михайловича
  */
-console.log(mihalych['родительный']);
+console.log(mihalych['родительный'])
 /* ->
 * Михалыча
 */
@@ -148,20 +127,20 @@ console.log(mihalych['родительный']);
 
 *Синтаксис:*
 ```js
-sklonenie.lastname(фамилия[, пол]);
+sklonenie.lastname(фамилия[, пол])
 ```
 
 *Пример:*
 
 ```js
-var lermontov = sklonenie.lastname('Лермонтов');
-var gyote     = sklonenie.lastname('Гёте');
+const lermontov = sklonenie.lastname('Лермонтов')
+const gyote     = sklonenie.lastname('Гёте')
 
-console.log(lermontov['дательный']);
+console.log(lermontov['дательный'])
 /* ->
  * Лермонтову
  */
-console.log(gyote['предложный']);
+console.log(gyote['предложный'])
 /* ->
 * Гёте
 */
