@@ -1,5 +1,5 @@
 /**
- * Sklonenie.js
+ * Sklonenie
  * Лёгкая и быстрая библиотека для склонения по падежам русских имён, отчеств
  * и фамилий
  * @author Danakt Frost <mail@danakt.ru>
@@ -10,13 +10,13 @@ const FLEX_LISTS                   = require('./flexlist')
 
 /**
  * Получение окончания по выборке
- * @param  {string} string  — строка, содежащая имя, отчество или фамилию
- * @param  {number} gender  — род (1 или 2)
- * @param  {object} name    — индекс части имени (FIRST=0/MIDDLE=1/LAST=2)
+ * @param  {string} string    Строка, содежащая имя, отчество или фамилию
+ * @param  {number} gender    Род (1 или 2)
+ * @param  {object} nameIndex Индекс части имени (FIRST=0 / MIDDLE=1 / LAST=2)
  * @return {Array}
  */
-function getFlexion(str, g, nameIndex) {
-  let retArr = [] // Возвращаемый массив
+function getFlexion(str, gender, nameIndex) {
+  const retArr = [] // Возвращаемый массив
 
   const flexList = FLEX_LISTS[nameIndex]
 
@@ -28,7 +28,7 @@ function getFlexion(str, g, nameIndex) {
     if (eClear === ending) {
       // Если пол не совпадает, идём дальше
       const flexGender = flexList[e][flexList[e].length - 1]
-      if (g && !(flexGender & g)) {
+      if (gender && !(flexGender & gender)) {
         continue
       }
 
@@ -44,7 +44,7 @@ function getFlexion(str, g, nameIndex) {
   }
 
   if (retArr.length === 0) {
-    retArr = fillArray(Array(CASES.length), str)
+    return fillArray(Array(CASES.length), str)
   }
 
   return retArr
@@ -52,10 +52,10 @@ function getFlexion(str, g, nameIndex) {
 
 /**
  * Получение склонений частей имени
- * @param  {number} propNum — (FIRST=0/MIDDLE=1/LAST=2)
- * @param  {string} str     — часть имени (имя/отчество/фамилия)
- * @param  {number} gender  — род
- * @return {Array}          — результат
+ * @param  {number}  nameIndex  Индекс части имени (FIRST=0 / MIDDLE=1 / LAST=2)
+ * @param  {string}  str        Часть имени (имя/отчество/фамилия)
+ * @param  {?number} [gender=0] Род
+ * @return {Array}              Результат
  */
 function getName(nameIndex, str, gender = 0) {
   // Если строка не проходит проверку, возвращаем её же
@@ -66,12 +66,12 @@ function getName(nameIndex, str, gender = 0) {
   const flex = FLEX_LISTS[nameIndex]
 
   // Ищем подходящее окончание из списка
-  let out
+  let out = []
 
   // Если это фамилия и двойная, склоняем обе части
   if (nameIndex === NAME.LAST && str.indexOf('-') > -1) {
-    let lastNames = str.split('-')
-    let lastNamesArr = []
+    const lastNames = str.split('-')
+    const lastNamesArr = []
 
     // Получаем склонения каждой части
     for (let i = 0; i < lastNames.length; i++) {
@@ -94,24 +94,20 @@ function getName(nameIndex, str, gender = 0) {
 
 /**
  * Обработка пола
- * @param {?number|string} g — Род. Может принимать значения: 1 или 2,
+ * @param {?number|string} gender Род. Может принимать значения: 1 или 2,
  * «m» или «w», «man» или «woman»
  */
-function getGender(g) {
-  if (g == null) {
-    return 0
-  }
-
-  if (typeof g === 'number') {
-    return g >= 0 && g <= 2
-      ? g
+function getGender(gender = 0) {
+  if (typeof gender === 'number') {
+    return gender >= 0 && gender <= 2
+      ? gender
       : 0
-  } else if (typeof g === 'string') {
-    g = g.toLowerCase()
+  } else if (typeof gender === 'string') {
+    gender = gender.toLowerCase()
 
-    if (g === 'm' || g === 'man') {
+    if (gender === 'm' || gender === 'man') {
       return M
-    } else if (g === 'w' || g === 'woman') {
+    } else if (gender === 'w' || gender === 'woman') {
       return W
     }
   }
@@ -120,11 +116,11 @@ function getGender(g) {
 }
 
 /**
- * Получение склонений имени. Экспортируется по-дефолту
- * @param  {string}  firstname  — Склоняемое имя
- * @param  {string}  middlename — Склоняемое отчество
- * @param  {string}  lastname   — Склоняемая фамилия
- * @param  {?number} [gender=0] — Род
+ * Получение склонений имени
+ * @param  {string}  firstname  Склоняемое имя
+ * @param  {string}  middlename Склоняемое отчество
+ * @param  {string}  lastname   Склоняемая фамилия
+ * @param  {?number} [gender=0] Род
  * @return {object}
  */
 function full(firstname, middlename, lastname, g = 0) {
@@ -137,11 +133,14 @@ function full(firstname, middlename, lastname, g = 0) {
   }
 
   for (let i = 0; i < CASES.length; i++) {
-    ret[i] = ret[CASES[i]] = [
+    const decline = [
       ret.firstname[i],
       ret.middlename[i],
       ret.lastname[i],
     ]
+
+    ret[i] = decline
+    ret[CASES[i]] = decline
   }
 
   return ret
@@ -149,8 +148,8 @@ function full(firstname, middlename, lastname, g = 0) {
 
 /**
  * Экспорт склонения имени
- * @param  {string}  str    — имя
- * @param  {?number} gender — род
+ * @param  {string}  str    Имя
+ * @param  {?number} gender Род
  * @return {Array}
  */
 function firstname(str, gender) {
@@ -159,8 +158,8 @@ function firstname(str, gender) {
 
 /**
  * Экспорт склонения отчества
- * @param  {string}  str    — отчество
- * @param  {?number} gender — род
+ * @param  {string}  str    Отчество
+ * @param  {?number} gender Род
  * @return {Array}
  */
 function middlename(str, gender) {
@@ -169,8 +168,8 @@ function middlename(str, gender) {
 
 /**
  * Экспорт склонения отчества
- * @param  {string}  str    — фамилия
- * @param  {?number} gender — род
+ * @param  {string}  str    Фамилия
+ * @param  {?number} gender Род
  * @return {Array}
  */
 function lastname(str, gender) {
@@ -179,10 +178,6 @@ function lastname(str, gender) {
 
 /**
  * @exports
- * @default full
- * @prop firstname
- * @prop middlename
- * @prop lastname
  */
 const sklonenie = full
 sklonenie.firstname  = firstname
