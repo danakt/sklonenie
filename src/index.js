@@ -191,6 +191,7 @@ sklonenie.lastname   = lastname
 
 if (typeof module !== 'undefined' && module.exports != null) {
   module.exports = sklonenie
+  module.exports.default = sklonenie
 } else if (typeof window !== 'undefined') {
   window.sklonenie = sklonenie
 } else {
