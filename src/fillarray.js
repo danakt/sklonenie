@@ -1,4 +1,4 @@
-/** ----------------------------------------------------------------------------
+/**
  * Filling array
  * @param {Array} array
  * @param {*}     value
@@ -44,7 +44,7 @@ function fillArray(array, value) {
     return O
 }
 
-/** ----------------------------------------------------------------------------
+/**
  * @exports
  * @default fillArray
  */

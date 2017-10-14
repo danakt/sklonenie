@@ -8,11 +8,11 @@ const fillArray                    = require('./fillarray')
 const { M, W, CASES, CHARS, NAME } = require('./constants')
 const FLEX_LISTS                   = require('./flexlist')
 
-/** ----------------------------------------------------------------------------
+/**
  * Получение окончания по выборке
- * @param  {String} string  — строка, содежащая имя, отчество или фамилию
- * @param  {Number} gender  — род (1 или 2)
- * @param  {Object} name    — индекс части имени (FIRST=0/MIDDLE=1/LAST=2)
+ * @param  {string} string  — строка, содежащая имя, отчество или фамилию
+ * @param  {number} gender  — род (1 или 2)
+ * @param  {object} name    — индекс части имени (FIRST=0/MIDDLE=1/LAST=2)
  * @return {Array}
  */
 function getFlexion(str, g, nameIndex) {
@@ -50,11 +50,11 @@ function getFlexion(str, g, nameIndex) {
     return retArr
 }
 
-/** ----------------------------------------------------------------------------
+/**
  * Получение склонений частей имени
- * @param  {Number} propNum — (FIRST=0/MIDDLE=1/LAST=2)
- * @param  {String} str     — часть имени (имя/отчество/фамилия)
- * @param  {Number} gender  — род
+ * @param  {number} propNum — (FIRST=0/MIDDLE=1/LAST=2)
+ * @param  {string} str     — часть имени (имя/отчество/фамилия)
+ * @param  {number} gender  — род
  * @return {Array}          — результат
  */
 function getName(nameIndex, str, gender = 0) {
@@ -92,9 +92,9 @@ function getName(nameIndex, str, gender = 0) {
     return out
 }
 
-/** ----------------------------------------------------------------------------
+/**
  * Обработка пола
- * @param {?Number|String} g — Род. Может принимать значения: 1 или 2,
+ * @param {?number|string} g — Род. Может принимать значения: 1 или 2,
  * «m» или «w», «man» или «woman»
  */
 function getGender(g) {
@@ -119,13 +119,13 @@ function getGender(g) {
     return 0
 }
 
-/** ----------------------------------------------------------------------------
+/**
  * Получение склонений имени. Экспортируется по-дефолту
- * @param  {String}  firstname  — Склоняемое имя
- * @param  {String}  middlename — Склоняемое отчество
- * @param  {String}  lastname   — Склоняемая фамилия
- * @param  {?Number} [gender=0] — Род
- * @return {Object}
+ * @param  {string}  firstname  — Склоняемое имя
+ * @param  {string}  middlename — Склоняемое отчество
+ * @param  {string}  lastname   — Склоняемая фамилия
+ * @param  {?number} [gender=0] — Род
+ * @return {object}
  */
 function full(firstname, middlename, lastname, g = 0) {
     const gender = getGender(g)
@@ -147,37 +147,37 @@ function full(firstname, middlename, lastname, g = 0) {
     return ret
 }
 
-/** ----------------------------------------------------------------------------
+/**
  * Экспорт склонения имени
- * @param  {String}  str    — имя
- * @param  {?Number} gender — род
+ * @param  {string}  str    — имя
+ * @param  {?number} gender — род
  * @return {Array}
  */
 function firstname(str, gender) {
     return getName(NAME.FIRST, str, gender)
 }
 
-/** ----------------------------------------------------------------------------
+/**
  * Экспорт склонения отчества
- * @param  {String}  str    — отчество
- * @param  {?Number} gender — род
+ * @param  {string}  str    — отчество
+ * @param  {?number} gender — род
  * @return {Array}
  */
 function middlename(str, gender) {
     return getName(NAME.MIDDLE, str, gender)
 }
 
-/** ----------------------------------------------------------------------------
+/**
  * Экспорт склонения отчества
- * @param  {String}  str    — фамилия
- * @param  {?Number} gender — род
+ * @param  {string}  str    — фамилия
+ * @param  {?number} gender — род
  * @return {Array}
  */
 function lastname(str, gender) {
     return getName(NAME.LAST, str, gender)
 }
 
-/** ----------------------------------------------------------------------------
+/**
  * @exports
  * @default full
  * @prop firstname
