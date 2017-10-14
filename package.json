@@ -1,35 +1,24 @@
 {
   "name": "sklonenie",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Declination Russian names",
   "main": "src/index.js",
+  "typings": "typings/index.d.ts",
   "scripts": {
     "start": "webpack -p --progress --colors",
     "test": "mocha test/test.js -c"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danakt/sklonenie.js.git"
+    "url": "git+https://github.com/danakt/sklonenie.git"
   },
-  "keywords": [
-    "sklonenie",
-    "declination",
-    "Russian",
-    "name",
-    "affix",
-    "flexies",
-    "names",
-    "firstname",
-    "lastname",
-    "middlename",
-    "cases"
-  ],
+  "keywords": ["sklonenie", "declination", "Russian", "name", "affix", "flexies", "names", "firstname", "lastname", "middlename", "cases"],
   "author": "Danakt Frost <mail@danakt.ru>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/danakt/sklonenie.js/issues"
+    "url": "https://github.com/danakt/sklonenie/issues"
   },
-  "homepage": "https://github.com/danakt/sklonenie.js",
+  "homepage": "https://github.com/danakt/sklonenie",
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.2.0"
