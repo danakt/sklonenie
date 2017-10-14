@@ -3,7 +3,7 @@ Sklonenie
 Лёгкая и быстрая библиотека для склонения по падежам русских имён, отчеств и фамилий
 
 [![npm](https://img.shields.io/npm/v/sklonenie.svg?style=flat-square)](https://www.npmjs.com/package/sklonenie)
-[![Travis CI](https://img.shields.io/travis/danakt/sklonenie.js.svg?style=flat-square)](https://travis-ci.org/danakt/sklonenie.js)
+[![Travis CI](https://img.shields.io/travis/danakt/sklonenie.svg?style=flat-square)](https://travis-ci.org/danakt/sklonenie.js)
 [![Versioneye](https://www.versioneye.com/user/projects/58778f5b7179530040ecf6c4/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58778f5b7179530040ecf6c4)
 
 Использование
@@ -20,12 +20,8 @@ const sklonenie = require('sklonenie')
 // ...
 const bulgakov = sklonenie('Михаил', 'Афанасьевич', 'Булгаков')
 
-console.log(
-    `На страницах рукописи ${bulgakov['винительный'].join(' ')}
-    «Мастер и Маргарита» ученые обнаружили следы морфия`
- )
-// На страницах рукописи Михаила Афанасьевича Булгакова
-// «Мастер и Маргарита» ученые обнаружили следы морфия
+console.log(`На страницах рукописи ${bulgakov['винительный'].join(' ')} «Мастер и Маргарита» ученые обнаружили следы морфия`)
+// На страницах рукописи Михаила Афанасьевича Булгакова «Мастер и Маргарита» ученые обнаружили следы морфия
 ```
 
 Методы
