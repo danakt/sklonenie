@@ -4,7 +4,6 @@
  * и фамилий
  * @author Danakt Frost <mail@danakt.ru>
  */
-const fillArray                    = require('./fillarray')
 const { M, W, CASES, CHARS, NAME } = require('./constants')
 const FLEX_LISTS                   = require('./flexlist')
 
@@ -44,7 +43,7 @@ function getFlexion(str, gender, nameIndex) {
   }
 
   if (retArr.length === 0) {
-    return fillArray(Array(CASES.length), str)
+    return Array(CASES.length).fill(str)
   }
 
   return retArr
@@ -59,8 +58,9 @@ function getFlexion(str, gender, nameIndex) {
  */
 function getName(nameIndex, str, gender = 0) {
   // Если строка не проходит проверку, возвращаем её же
-  if (!str || typeof str !== 'string')
-    return fillArray(Array(CASES.length), str + '')
+  if (!str || typeof str !== 'string') {
+    return Array(CASES.length).fill(str + '')
+  }
 
   // Получаем список флексий
   const flex = FLEX_LISTS[nameIndex]
