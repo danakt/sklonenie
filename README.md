@@ -4,7 +4,7 @@ Sklonenie
 
 [![npm](https://img.shields.io/npm/v/sklonenie.svg?style=flat-square)](https://www.npmjs.com/package/sklonenie)
 [![Travis CI](https://img.shields.io/travis/danakt/sklonenie.svg?style=flat-square)](https://travis-ci.org/danakt/sklonenie.js)
-[![Versioneye](https://www.versioneye.com/user/projects/58778f5b7179530040ecf6c4/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58778f5b7179530040ecf6c4)
+<!-- [![Versioneye](https://www.versioneye.com/user/projects/58778f5b7179530040ecf6c4/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58778f5b7179530040ecf6c4) -->
 
 Использование
 --------------------------------------------------------------------------------
