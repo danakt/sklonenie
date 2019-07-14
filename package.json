@@ -1,6 +1,6 @@
 {
   "name": "sklonenie",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Declination Russian names",
   "main": "src/index.js",
   "typings": "typings/index.d.ts",
